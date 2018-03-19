@@ -2,6 +2,19 @@ defmodule BcrTest do
   use ExUnit.Case
   doctest Bcr
 
+  describe ".bar_chars_to_int_str/1" do
+    test "converts multiple bar characters in the same string to an integer string" do
+      bar_chars = """
+          _  _     _  _  _  _  _ 
+        | _| _||_||_ |_   ||_||_|
+        ||_  _|  | _||_|  ||_| _|
+
+      """
+
+      assert Bcr.bar_chars_to_int_str(bar_chars) == "123456789"
+    end
+  end
+
   describe ".bar_chars_to_list/1" do
     test "converts multiple bar characters in the same string to a list of bar characters" do
       bar_chars = """
@@ -69,7 +82,7 @@ defmodule BcrTest do
       |_|
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 0}
+      assert Bcr.bar_char_to_int(bar_char) == 0
     end
 
     test "can convert to 1" do
@@ -79,7 +92,7 @@ defmodule BcrTest do
         |
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 1}
+      assert Bcr.bar_char_to_int(bar_char) == 1
     end
 
     test "can convert to 2" do
@@ -89,7 +102,7 @@ defmodule BcrTest do
       |_ 
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 2}
+      assert Bcr.bar_char_to_int(bar_char) == 2
     end
 
     test "can convert to 3" do
@@ -99,7 +112,7 @@ defmodule BcrTest do
        _|
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 3}
+      assert Bcr.bar_char_to_int(bar_char) == 3
     end
 
     test "can convert to 4" do
@@ -109,7 +122,7 @@ defmodule BcrTest do
         |
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 4}
+      assert Bcr.bar_char_to_int(bar_char) == 4
     end
 
     test "can convert to 5" do
@@ -119,7 +132,7 @@ defmodule BcrTest do
        _|
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 5}
+      assert Bcr.bar_char_to_int(bar_char) == 5
     end
 
     test "can convert to 6" do
@@ -129,7 +142,7 @@ defmodule BcrTest do
       |_|
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 6}
+      assert Bcr.bar_char_to_int(bar_char) == 6
     end
 
     test "can convert to 7" do
@@ -139,7 +152,7 @@ defmodule BcrTest do
         |
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 7}
+      assert Bcr.bar_char_to_int(bar_char) == 7
     end
 
     test "can convert to 8" do
@@ -149,7 +162,7 @@ defmodule BcrTest do
       |_|
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 8}
+      assert Bcr.bar_char_to_int(bar_char) == 8
     end
 
     test "can convert to 9" do
@@ -159,7 +172,7 @@ defmodule BcrTest do
        _|
       """
 
-      assert Bcr.bar_char_to_int(bar_char) == {:ok, 9}
+      assert Bcr.bar_char_to_int(bar_char) == 9
     end
   end
 end

@@ -6,6 +6,19 @@ defmodule Bcr do
   @bar_char_width 3
 
   @doc """
+  Converts multiple bar characters in the same string to an integer string.
+  No trailing whitespace should be removed from the input.
+  Each line must end in a newline character.
+  The final line must be blank.
+  """
+  def bar_chars_to_int_str(bar_chars) do
+    bar_chars
+    |> bar_chars_to_list()
+    |> Enum.map(&bar_char_to_int/1)
+    |> Enum.join()
+  end
+
+  @doc """
   Converts multiple bar characters in the same string to a list of bar characters.
   No trailing whitespace should be removed from the input.
   Each line must end in a newline character.
@@ -30,83 +43,69 @@ defmodule Bcr do
        _ 
       | |
       |_|
-      """) do
-    {:ok, 0}
-  end
+      """),
+      do: 0
 
   def bar_char_to_int("""
          
         |
         |
-      """) do
-    {:ok, 1}
-  end
+      """),
+      do: 1
 
   def bar_char_to_int("""
        _ 
        _|
       |_ 
-      """) do
-    {:ok, 2}
-  end
+      """),
+      do: 2
 
   def bar_char_to_int("""
        _ 
        _|
        _|
-      """) do
-    {:ok, 3}
-  end
+      """),
+      do: 3
 
   def bar_char_to_int("""
          
       |_|
         |
-      """) do
-    {:ok, 4}
-  end
+      """),
+      do: 4
 
   def bar_char_to_int("""
        _ 
       |_ 
        _|
-      """) do
-    {:ok, 5}
-  end
+      """),
+      do: 5
 
   def bar_char_to_int("""
        _ 
       |_ 
       |_|
-      """) do
-    {:ok, 6}
-  end
+      """),
+      do: 6
 
   def bar_char_to_int("""
        _ 
         |
         |
-      """) do
-    {:ok, 7}
-  end
+      """),
+      do: 7
 
   def bar_char_to_int("""
        _ 
       |_|
       |_|
-      """) do
-    {:ok, 8}
-  end
+      """),
+      do: 8
 
   def bar_char_to_int("""
        _ 
       |_|
        _|
-      """) do
-    {:ok, 9}
-  end
-
-  def bar_char_to_int(bar_char) when is_binary(bar_char) do
-    {:error, :bar_char_not_recognized}
-  end
+      """),
+      do: 9
 end
