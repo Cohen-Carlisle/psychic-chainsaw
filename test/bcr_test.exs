@@ -2,6 +2,65 @@ defmodule BcrTest do
   use ExUnit.Case
   doctest Bcr
 
+  describe ".bar_chars_to_list/1" do
+    test "converts multiple bar characters in the same string to a list of bar characters" do
+      bar_chars = """
+          _  _     _  _  _  _  _ 
+        | _| _||_||_ |_   ||_||_|
+        ||_  _|  | _||_|  ||_| _|
+
+      """
+
+      assert Bcr.bar_chars_to_list(bar_chars) == [
+               """
+                  
+                 |
+                 |
+               """,
+               """
+                _ 
+                _|
+               |_ 
+               """,
+               """
+                _ 
+                _|
+                _|
+               """,
+               """
+                  
+               |_|
+                 |
+               """,
+               """
+                _ 
+               |_ 
+                _|
+               """,
+               """
+                _ 
+               |_ 
+               |_|
+               """,
+               """
+                _ 
+                 |
+                 |
+               """,
+               """
+                _ 
+               |_|
+               |_|
+               """,
+               """
+                _ 
+               |_|
+                _|
+               """
+             ]
+    end
+  end
+
   describe ".bar_char_to_int/1" do
     test "can convert to 0" do
       bar_char = """
