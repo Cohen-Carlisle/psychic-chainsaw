@@ -4,6 +4,19 @@ defmodule Bcr do
   """
 
   @bar_char_width 3
+  @bar_char_height 3
+
+  @doc """
+  Processes the file of bar chars at the given path and returns a list of string integers.
+  File must contain bar characters separated by empty lines.
+  File must end with an empty line.
+  """
+  def process_file(path) do
+    ~r/(.+\n){#{@bar_char_height}}\n/
+    |> Regex.scan(File.read!(path))
+    |> Enum.map(&List.first/1)
+    |> Enum.map(&bar_chars_to_int_str/1)
+  end
 
   @doc """
   Converts multiple bar characters in the same string to an integer string.

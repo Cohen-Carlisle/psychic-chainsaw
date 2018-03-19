@@ -2,6 +2,24 @@ defmodule BcrTest do
   use ExUnit.Case
   doctest Bcr
 
+  describe ".process_file/1" do
+    test "given a valid file, returns of list of integer strings" do
+      assert Bcr.process_file("test/fixtures/all_valid_numbers.bc") == [
+               "000000000",
+               "111111111",
+               "222222222",
+               "333333333",
+               "444444444",
+               "555555555",
+               "666666666",
+               "777777777",
+               "888888888",
+               "999999999",
+               "123456789"
+             ]
+    end
+  end
+
   describe ".bar_chars_to_int_str/1" do
     test "converts multiple bar characters in the same string to an integer string" do
       bar_chars = """
