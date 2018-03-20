@@ -39,12 +39,9 @@ defmodule Bcr do
   """
   def bar_chars_to_list(bar_chars) do
     bar_chars
-    |> String.replace_suffix("\n\n", "")
-    |> String.split("\n")
-    |> Enum.map(&(Regex.scan(~r/.{#{@bar_char_width}}/, &1) |> List.flatten()))
-    |> List.zip()
-    |> Enum.map(&Tuple.to_list/1)
-    |> Enum.map(&(Enum.join(&1, "\n") <> "\n"))
+    |> trim_trailing_newlines()
+    |> bar_char_matrix()
+    |> matrix_to_string()
   end
 
   @doc """
@@ -121,4 +118,20 @@ defmodule Bcr do
        _|
       """),
       do: 9
+
+  defp trim_trailing_newlines(bar_char) do
+    String.replace_suffix(bar_char, "\n\n", "")
+  end
+
+  defp bar_char_matrix(trimmed_bar_chars) do
+    trimmed_bar_chars
+    |> String.split("\n")
+    |> Enum.map(&(Regex.scan(~r/.{#{@bar_char_width}}/, &1) |> List.flatten()))
+    |> List.zip()
+    |> Enum.map(&Tuple.to_list/1)
+  end
+
+  defp matrix_to_string(bar_char_matrix) do
+    Enum.map(bar_char_matrix, &(Enum.join(&1, "\n") <> "\n"))
+  end
 end
